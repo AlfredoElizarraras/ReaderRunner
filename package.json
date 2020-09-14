@@ -1,0 +1,21 @@
+{
+  "name": "reader-runner",
+  "version": "1.0.0",
+  "description": "An educational JavaScript game created with Phaser 3.",
+  "repository": "https://github.com/AlfredoElizarraras/ReaderRunner.git",
+  "author": "Oscar Alfredo Gómez Elizarrarás <elizarrarasalfredoog@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/AlfredoElizarraras/ReaderRunner/issues"
+  },
+  "homepage": "https://github.com/AlfredoElizarraras/ReaderRunner#readme",
+  "scripts": {
+    "build": "webpack --mode development",
+    "build:watch": "webpack -w --mode development",
+    "build:prod": "webpack --mode production",
+    "go": "webpack-dev-server --host 0.0.0.0 --port 7000",
+    "eslint": "npx eslint --fix src",
+    "test": "jest"
+  }
+}
