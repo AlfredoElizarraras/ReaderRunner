@@ -20,7 +20,7 @@ export default class TitleScene extends Phaser.Scene {
     );
   }
 
-  createButton (label, number = 1) {
+  createButton (label, scene, number = 1) {
     this.gameButton = this.add.sprite(100, 200, "redButton").setInteractive();
     this.centerButton(this.gameButton, number);
 
@@ -34,7 +34,7 @@ export default class TitleScene extends Phaser.Scene {
     this.gameButton.on(
       "pointerdown",
       function (pointer) {
-        this.scene.start("Game");
+        this.scene.start(`${scene}`);
       }.bind(this)
     );
 
@@ -49,9 +49,9 @@ export default class TitleScene extends Phaser.Scene {
 
   create() {
     // Game
-    this.createButton('Play', 1.5);
-    this.createButton('Leader Board', 0.5);
-    this.createButton('Settings', -0.5);
-    this.createButton('Credits', -1.5);
+    this.createButton('Play', 'Game', 1.5);
+    this.createButton('Leader Board', 'Game', 0.5);
+    this.createButton('Settings', 'Options', -0.5);
+    this.createButton('Credits', 'Credits', -1.5);
   }
 }
