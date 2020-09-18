@@ -10,6 +10,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
+    this.scene.start('Title');
     this.readyCount++;
     if (this.readyCount === 2) {
       this.scene.start('Title');
@@ -90,13 +91,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load assets needed in our game
-    this.load.image("creditsButton", "../src/assets/ui/creditsButton.png");
-    this.load.image("leaderBoardButton", "../src/assets/ui/leaderBoardButton.png");
-    this.load.image("playButton", "../src/assets/ui/playButton.png");
-    this.load.image("settingsButton", "../src/assets/ui/playButton.png");
     this.load.image("redTick", "../src/assets/ui/redTick.png");
     this.load.image("grayTick", "../src/assets/ui/grayTick.png");
-    this.load.image("microverseLogo", "../src/assets/microverseLogo.png");
+    this.load.image("redButton", "../src/assets/ui/redButton.png");
+    this.load.image("greenButton", "../src/assets/ui/greenButton.png");
   }
 
   create() {}
