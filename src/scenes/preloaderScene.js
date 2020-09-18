@@ -98,6 +98,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('grayTick', '../src/assets/ui/grayTick.png');
     this.load.image('redButton', '../src/assets/ui/redButton.png');
     this.load.image('greenButton', '../src/assets/ui/greenButton.png');
+    this.load.audio('bgMusic', ['../src/assets/audio/TownTheme.ogg']);
   }
 
   preload() {
