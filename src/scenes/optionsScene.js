@@ -6,8 +6,7 @@ export default class OptionsScene extends Phaser.Scene {
   }
 
   create() {
-    this.musicOn = true;
-    this.soundOn = true;
+    this.model = this.sys.game.globals.model;
 
     this.text = this.add.text(300, 100, "Options", { fontSize: 40 });
     this.musicButton = this.add.image(200, 200, "redTick");
@@ -22,7 +21,7 @@ export default class OptionsScene extends Phaser.Scene {
     this.musicButton.on(
       "pointerdown",
       function () {
-        this.musicOn = !this.musicOn;
+        this.model.musicOn = !this.model.musicOn;
         this.updateAudio();
       }.bind(this)
     );
@@ -30,12 +29,10 @@ export default class OptionsScene extends Phaser.Scene {
     this.soundButton.on(
       "pointerdown",
       function () {
-        this.soundOn = !this.soundOn;
+        this.model.soundOn = !this.model.soundOn;
         this.updateAudio();
       }.bind(this)
     );
-
-    this.updateAudio();
 
     this.menuButton = this.add.sprite(400, 500, "redButton").setInteractive();
     this.menuText = this.add.text(0, 0, "Menu", {
@@ -50,16 +47,24 @@ export default class OptionsScene extends Phaser.Scene {
         this.scene.start("Title");
       }.bind(this)
     );
+
+    this.updateAudio();
   }
 
   updateAudio() {
-    if (this.musicOn === false) {
+    if (this.model.musicOn === false) {
       this.musicButton.setTexture("grayTick");
+      this.sys.game.globals.bgMusic.stop();
+      this.model.bgMusicPlaying = false;
     } else {
       this.musicButton.setTexture("redTick");
+      if (this.model.bgMusicPlaying === false) {
+        this.sys.game.globals.bgMusic.play();
+        this.model.bgMusicPlaying = true;
+      }
     }
 
-    if (this.soundOn === false) {
+    if (this.model.soundOn === false) {
       this.soundButton.setTexture("grayTick");
     } else {
       this.soundButton.setTexture("redTick");
