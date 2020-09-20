@@ -1,25 +1,10 @@
 import 'phaser';
 import config from '../config/config';
+import UiButton from '../objects/uiButton';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
-  }
-
-  centerButton(gameObject, offset = 0) {
-    Phaser.Display.Align.In.Center(
-      gameObject,
-      this.add.zone(
-        config.width / 2,
-        config.height / 2 - offset * 100,
-        config.width,
-        config.height
-      )
-    );
-  }
-
-  centerButtonText(gameText, gameButton) {
-    Phaser.Display.Align.In.Center(gameText, gameButton);
   }
 
   createButton(label, scene, number = 1) {
@@ -50,14 +35,13 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // Game
-    this.createButton('Play', 'Game', 1.5);
-    this.createButton('Leader Board', 'Game', 0.5);
-    this.createButton('Settings', 'Options', -0.5);
-    this.createButton('Credits', 'Credits', -1.5);
+    this.gameButton = new UiButton(this, config.width / 2, 100, 'redButton', 'greenButton', 'Play', 'Game');
+    this.leaderBoardButton = new UiButton(this, config.width / 2, 211, 'redButton', 'greenButton', 'Leader Board', 'Game');
+    this.settingsButton = new UiButton(this, config.width / 2, 322, 'redButton', 'greenButton', 'Settings', 'Options');
+    this.creditsButton = new UiButton(this, config.width / 2, 433, 'redButton', 'greenButton', 'Credits', 'Credits');
+
 
     this.model = this.sys.game.globals.model;
-    1
 	
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
