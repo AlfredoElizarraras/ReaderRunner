@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
@@ -20,16 +21,16 @@ export default class TitleScene extends Phaser.Scene {
 
     this.gameButton.on(
       'pointerdown',
-      function (pointer) {
+      () => {
         this.scene.start(`${scene}`);
-      }.bind(this)
+      },
     );
 
-    this.input.on('pointerover', function (event, gameObjects) {
+    this.input.on('pointerover', (event, gameObjects) => {
       gameObjects[0].setTexture('greenButton');
     });
 
-    this.input.on('pointerout', function (event, gameObjects) {
+    this.input.on('pointerout', (event, gameObjects) => {
       gameObjects[0].setTexture('redButton');
     });
   }
@@ -42,7 +43,7 @@ export default class TitleScene extends Phaser.Scene {
 
 
     this.model = this.sys.game.globals.model;
-	
+
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
       this.bgMusic.play();
@@ -51,3 +52,4 @@ export default class TitleScene extends Phaser.Scene {
     }
   }
 }
+/* eslint-enable no-undef */

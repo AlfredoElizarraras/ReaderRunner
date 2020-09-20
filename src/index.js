@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import 'phaser';
 import config from './config/config';
 import GameScene from './scenes/gameScene';
@@ -24,3 +25,4 @@ class Game extends Phaser.Game {
 }
 
 window.game = new Game();
+/* eslint-enable no-undef */
