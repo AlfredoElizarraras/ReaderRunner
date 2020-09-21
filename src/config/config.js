@@ -6,5 +6,12 @@ export default {
   parent: 'phaser-example',
   width: 800,
   height: 560,
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 300 },
+      debug: false,
+    },
+  },
 };
 /* eslint-enable no-undef */
