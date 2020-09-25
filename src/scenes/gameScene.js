@@ -91,17 +91,27 @@ export default class GameScene extends Phaser.Scene {
 
   renderDesert () {
     this.add.image(config.width / 2, config.height / 2 - 200, 'bgDessert');
-    this.platforms = this.add.tileSprite(50, config.height - 50, config.width * 2, 93, 'ground')
-    this.physics.add.existing(this.platforms, true);
+    this.platformOne = this.add.tileSprite(50, config.height - 40, config.width * 2, 93, 'ground')
+    this.platformTwo = this.add.tileSprite(config.width + 1, config.height - 40, config.width * 2, 93, 'ground')
+    this.physics.add.existing(this.platformOne, true);
   }
 
   loadLetter () {
     this.load.image('letter', '../src/assets/letters/letterBox1.png');
   }
 
+  createRandomLetter() {
+    let lettersArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
+                        'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                        'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                        'V', 'X', 'Y', 'Z'];
+    return lettersArray[Phaser.Math.Between(0, 24)];
+  }
+
   renderLetter() {
     this.letterBox = this.add.sprite(config.width - 90, config.height - 130, "letter");
-    this.text = this.add.text(16, 16, 'S', {
+    this.currentLetter = this.createRandomLetter();
+    this.text = this.add.text(16, 16, this.currentLetter, {
       fontSize: "28px",
       fill: "#fff",
     });
@@ -119,24 +129,35 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(objectToCollideA, objectToCollideB);
   }
 
-  moveObject(objectToMove, xMovement, xPositionToDisapear) {
-    if (objectToMove.x < xPositionToDisapear) {
-      objectToMove.destroy();
+  moveObject(objectToMove, xMovement, yMovement, xPositionToDisappear, xPositionToReappear) {
+    if (objectToMove.x < xPositionToDisappear) {
+      objectToMove.x = xPositionToReappear
+      objectToMove.y = yMovement;
     }
     else {
       objectToMove.x += xMovement;
     }
   }
 
+  changeLetter (xPositionToChange) {
+    if (this.letterBox.x < xPositionToChange){
+      this.text.text = this.createRandomLetter();
+    }
+  }
+
   playerRun() {
-    this.moveObject(this.platforms, -5, -750);
-    this.moveObject(this.letterBox, -5, -750);
-    this.moveObject(this.text, -5, -750);
+    let letterYMovement = Phaser.Math.Between(config.height - 130, config.height - 210);
+    this.moveObject(this.platformOne, -2, config.height - 40, -750, config.width);
+    this.moveObject(this.platformTwo, -2, config.height - 40, -750, config.width);
+    this.moveObject(this.letterBox, -2, letterYMovement, -30, config.width);
+    this.moveObject(this.text, -2, letterYMovement, -30, config.width);
+    this.changeLetter(-30);
+    Phaser.Display.Align.In.Center(this.text, this.letterBox);
   }
 
   jump() {
     if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(1200);
+      this.player.setVelocityY(1500);
     }
   }
 
@@ -151,7 +172,7 @@ export default class GameScene extends Phaser.Scene {
     this.renderAdventureGirl();
     this.renderLetter();
     this.renderScore();
-    this.setCollision(this.player, this.platforms);
+    this.setCollision(this.player, this.platformOne);
 
     this.menuButton = new UiButton(this, 680, 50, 'redButton', 'greenButton', 'Menu', 'Title');
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -161,7 +182,6 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     this.jump();
-
     if (this.cursors.right.isDown) {
       this.playerRun();
       if (!this.running) {
