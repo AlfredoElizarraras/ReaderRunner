@@ -108,6 +108,35 @@ export default class GameScene extends Phaser.Scene {
     return lettersArray[Phaser.Math.Between(0, 24)];
   }
 
+  moveLetter() {
+    let letterYMovement = Phaser.Math.Between(config.height - 130, config.height - 210);
+    this.moveObject(this.letterBox, -5, letterYMovement, -30, config.width);
+    this.moveObject(this.text, -5, letterYMovement, -30, config.width);
+    this.changeLetter(-30);
+    Phaser.Display.Align.In.Center(this.text, this.letterBox);
+  }
+
+  renderScore() {
+    this.score = 0;
+    this.scoreText = this.add.text(16, 16, "score: 0", {
+      fontSize: "32px",
+      fill: "#000",
+    });
+  }
+
+  collectLetter() {
+    console.log('collect letter called');
+    // letter.disableBody(true, true);
+    if (this.currentLetter === this.text.text) {
+      this.score += 20;
+    }
+    else {
+      this.score -= 10;
+    }
+    this.moveLetter();
+    this.scoreText.setText(`score: ${this.score}`);
+  }
+
   renderLetter() {
     this.letterBox = this.add.sprite(config.width - 90, config.height - 130, "letter");
     this.currentLetter = this.createRandomLetter();
@@ -116,13 +145,8 @@ export default class GameScene extends Phaser.Scene {
       fill: "#fff",
     });
     Phaser.Display.Align.In.Center(this.text, this.letterBox);
-  }
-
-  renderScore() {
-    this.scoreText = this.add.text(16, 16, "score: 0", {
-      fontSize: "32px",
-      fill: "#000",
-    });
+    this.physics.add.overlap(this.player, this.letterBox, this.collectLetter, null, this);
+    console.log('add overlap function');
   }
 
   setCollision(objectToCollideA, objectToCollideB) {
@@ -146,13 +170,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   playerRun() {
-    let letterYMovement = Phaser.Math.Between(config.height - 130, config.height - 210);
-    this.moveObject(this.platformOne, -2, config.height - 40, -750, config.width);
-    this.moveObject(this.platformTwo, -2, config.height - 40, -750, config.width);
-    this.moveObject(this.letterBox, -2, letterYMovement, -30, config.width);
-    this.moveObject(this.text, -2, letterYMovement, -30, config.width);
-    this.changeLetter(-30);
-    Phaser.Display.Align.In.Center(this.text, this.letterBox);
+    this.moveObject(this.platformOne, -5, config.height - 40, -750, config.width);
+    this.moveObject(this.platformTwo, -5, config.height - 40, -750, config.width);
+    this.moveLetter();
   }
 
   jump() {
@@ -170,9 +190,9 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.renderDesert();
     this.renderAdventureGirl();
-    this.renderLetter();
     this.renderScore();
     this.setCollision(this.player, this.platformOne);
+    this.renderLetter();
 
     this.menuButton = new UiButton(this, 680, 50, 'redButton', 'greenButton', 'Menu', 'Title');
     this.cursors = this.input.keyboard.createCursorKeys();
