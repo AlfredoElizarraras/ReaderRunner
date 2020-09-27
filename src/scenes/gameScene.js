@@ -2,6 +2,7 @@
 import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
+import * as utils from '../objects/utils';
 
 
 export default class GameScene extends Phaser.Scene {
@@ -9,31 +10,12 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  loadAdventureGirl () {
-    const adventureGirlStayPath = '../src/assets/adventureGirl/stay/';
-    const adventureGirlRunPath = '../src/assets/adventureGirl/run/';
-
+  loadAdventureGirl () {   
     // stay
-    this.load.image('player0', `${adventureGirlStayPath}adventureGirlStay.png`);
-    this.load.image('player1', `${adventureGirlStayPath}adventureGirlStay1.png`);
-    this.load.image('player2', `${adventureGirlStayPath}adventureGirlStay2.png`);
-    this.load.image('player3', `${adventureGirlStayPath}adventureGirlStay3.png`);
-    this.load.image('player4', `${adventureGirlStayPath}adventureGirlStay4.png`);
-    this.load.image('player5', `${adventureGirlStayPath}adventureGirlStay5.png`);
-    this.load.image('player6', `${adventureGirlStayPath}adventureGirlStay6.png`);
-    this.load.image('player7', `${adventureGirlStayPath}adventureGirlStay7.png`);
-    this.load.image('player8', `${adventureGirlStayPath}adventureGirlStay8.png`);
-    this.load.image('player9', `${adventureGirlStayPath}adventureGirlStay9.png`);
+    utils.loadImageFolder(this, 'player', '../src/assets/adventureGirl/stay/adventureGirlStay', 10 );
 
     // run
-    this.load.image('playerRun0', `${adventureGirlRunPath}adventureGirlRun.png`);
-    this.load.image('playerRun1', `${adventureGirlRunPath}adventureGirlRun1.png`);
-    this.load.image('playerRun2', `${adventureGirlRunPath}adventureGirlRun2.png`);
-    this.load.image('playerRun3', `${adventureGirlRunPath}adventureGirlRun3.png`);
-    this.load.image('playerRun4', `${adventureGirlRunPath}adventureGirlRun4.png`);
-    this.load.image('playerRun5', `${adventureGirlRunPath}adventureGirlRun5.png`);
-    this.load.image('playerRun6', `${adventureGirlRunPath}adventureGirlRun6.png`);
-    this.load.image('playerRun7', `${adventureGirlRunPath}adventureGirlRun7.png`);
+    utils.loadImageFolder(this, 'playerRun', '../src/assets/adventureGirl/run/adventureGirlRun', 8);
   }
 
   renderAdventureGirl () {
@@ -70,7 +52,7 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-
+    
     // this.add.sprite(50, config.height - 130, "player0").play("playerRunning");
     this.player = this.physics.add.sprite(
       50,
