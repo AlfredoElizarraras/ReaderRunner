@@ -7,13 +7,12 @@ export const loadImageFolder = (scene, commonKey, commonPath, numberOfAssets) =>
 };
 
 export const createAnimation = (scene, commonKey, numberOfAssets) => {
-  let keys = [];
+  const keys = [];
   for (let i = 1; i < numberOfAssets; i += 1) {
     if (i === numberOfAssets - 1) {
-      keys.push({key: `${commonKey}${i}`, duration: 50});
-    }
-    else {
-      keys.push({key: `${commonKey}${i}`});
+      keys.push({ key: `${commonKey}${i}`, duration: 50 });
+    } else {
+      keys.push({ key: `${commonKey}${i}` });
     }
   }
   scene.anims.create({

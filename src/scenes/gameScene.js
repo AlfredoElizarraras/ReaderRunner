@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
-import "phaser";
-import config from "../config/config";
-import UiButton from "../objects/uiButton";
-import Player from "../objects/player";
-import * as gamePlayerOptions from "../config/gamePlayerOptions";
+import 'phaser';
+import config from '../config/config';
+import UiButton from '../objects/uiButton';
+import Player from '../objects/player';
+import * as gamePlayerOptions from '../config/gamePlayerOptions';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
-    super("Game");
+    super('Game');
   }
 
   loadAdventureGirl() {
@@ -16,7 +16,7 @@ export default class GameScene extends Phaser.Scene {
       this,
       gamePlayerOptions.playerStayKey,
       gamePlayerOptions.playerStayPath,
-      gamePlayerOptions.playerStayNumberOfAssets
+      gamePlayerOptions.playerStayNumberOfAssets,
     );
 
     // run
@@ -24,7 +24,7 @@ export default class GameScene extends Phaser.Scene {
       this,
       gamePlayerOptions.playerRunKey,
       gamePlayerOptions.playerRunPath,
-      gamePlayerOptions.playerRunNumberOfAssets
+      gamePlayerOptions.playerRunNumberOfAssets,
     );
   }
 
@@ -32,20 +32,20 @@ export default class GameScene extends Phaser.Scene {
     this.playerStayKeyFrames = Player.createPlayerAnimations(
       this,
       gamePlayerOptions.playerStayKey,
-      gamePlayerOptions.playerStayNumberOfAssets
+      gamePlayerOptions.playerStayNumberOfAssets,
     );
 
     this.playerRunKeyFrames = Player.createPlayerAnimations(
       this,
       gamePlayerOptions.playerRunKey,
-      gamePlayerOptions.playerRunNumberOfAssets
+      gamePlayerOptions.playerRunNumberOfAssets,
     );
 
     this.player = Player.createPlayer(
       this,
       gamePlayerOptions.playerInitialXPosition,
       gamePlayerOptions.playerInitialYPosition,
-      this.playerStayKeyFrames[0].key
+      this.playerStayKeyFrames[0].key,
     );
 
     Player.addPhysicsToPlayer(
@@ -53,74 +53,74 @@ export default class GameScene extends Phaser.Scene {
       gamePlayerOptions.playerYGravity,
       gamePlayerOptions.playerDepth,
       gamePlayerOptions.playerBounce,
-      gamePlayerOptions.playerHaveColliderWorldBounds
+      gamePlayerOptions.playerHaveColliderWorldBounds,
     );
   }
 
   loadDesert() {
-    const desertPath = "../src/assets/desert/";
-    this.load.image("bgDessert", `${desertPath}BG.png`);
-    this.load.image("ground", `${desertPath}desertPlatform.png`);
+    const desertPath = '../src/assets/desert/';
+    this.load.image('bgDessert', `${desertPath}BG.png`);
+    this.load.image('ground', `${desertPath}desertPlatform.png`);
   }
 
   renderDesert() {
-    this.add.image(config.width / 2, config.height / 2 - 200, "bgDessert");
+    this.add.image(config.width / 2, config.height / 2 - 200, 'bgDessert');
     this.platformOne = this.add.tileSprite(
       50,
       config.height - 40,
       config.width * 2,
       93,
-      "ground"
+      'ground',
     );
     this.platformTwo = this.add.tileSprite(
       config.width + 1,
       config.height - 40,
       config.width * 2,
       93,
-      "ground"
+      'ground',
     );
     this.physics.add.existing(this.platformOne, true);
   }
 
   loadLetter() {
-    this.load.image("letter", "../src/assets/letters/letterBox1.png");
+    this.load.image('letter', '../src/assets/letters/letterBox1.png');
   }
 
   createRandomLetter() {
-    let lettersArray = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "X",
-      "Y",
-      "Z",
+    const lettersArray = [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'X',
+      'Y',
+      'Z',
     ];
     return lettersArray[Phaser.Math.Between(0, 24)];
   }
 
   moveLetter() {
-    let letterYMovement = Phaser.Math.Between(
+    const letterYMovement = Phaser.Math.Between(
       config.height - 130,
-      config.height - 210
+      config.height - 210,
     );
     this.moveObject(this.letterBox, -5, letterYMovement, -30, config.width);
     this.moveObject(this.text, -5, letterYMovement, -30, config.width);
@@ -130,15 +130,13 @@ export default class GameScene extends Phaser.Scene {
 
   renderScore() {
     this.score = 0;
-    this.scoreText = this.add.text(16, 16, "score: 0", {
-      fontSize: "32px",
-      fill: "#000",
+    this.scoreText = this.add.text(16, 16, 'score: 0', {
+      fontSize: '32px',
+      fill: '#000',
     });
   }
 
   collectLetter() {
-    console.log("collect letter called");
-    // letter.disableBody(true, true);
     if (this.currentLetter === this.text.text) {
       this.score += 20;
     } else {
@@ -152,12 +150,12 @@ export default class GameScene extends Phaser.Scene {
     this.letterBox = this.add.sprite(
       config.width - 90,
       config.height - 130,
-      "letter"
+      'letter',
     );
     this.currentLetter = this.createRandomLetter();
     this.text = this.add.text(16, 16, this.currentLetter, {
-      fontSize: "28px",
-      fill: "#fff",
+      fontSize: '28px',
+      fill: '#fff',
     });
     Phaser.Display.Align.In.Center(this.text, this.letterBox);
     this.physics.add.overlap(
@@ -165,9 +163,8 @@ export default class GameScene extends Phaser.Scene {
       this.letterBox,
       this.collectLetter,
       null,
-      this
+      this,
     );
-    console.log("add overlap function");
   }
 
   setCollision(objectToCollideA, objectToCollideB) {
@@ -179,7 +176,7 @@ export default class GameScene extends Phaser.Scene {
     xMovement,
     yMovement,
     xPositionToDisappear,
-    xPositionToReappear
+    xPositionToReappear,
   ) {
     if (objectToMove.x < xPositionToDisappear) {
       objectToMove.x = xPositionToReappear;
@@ -201,14 +198,14 @@ export default class GameScene extends Phaser.Scene {
       -5,
       config.height - 40,
       -750,
-      config.width
+      config.width,
     );
     this.moveObject(
       this.platformTwo,
       -5,
       config.height - 40,
       -750,
-      config.width
+      config.width,
     );
     this.moveLetter();
   }
@@ -230,10 +227,10 @@ export default class GameScene extends Phaser.Scene {
       this,
       680,
       50,
-      "redButton",
-      "greenButton",
-      "Menu",
-      "Title"
+      'redButton',
+      'greenButton',
+      'Menu',
+      'Title',
     );
     this.cursors = this.input.keyboard.createCursorKeys();
   }

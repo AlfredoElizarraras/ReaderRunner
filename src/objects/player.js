@@ -8,17 +8,13 @@ const Player = (() => {
     utils.loadImageFolder(scene, key, path, numberOfAssets);
   };
 
-  const createPlayerAnimations = (scene, key, numberOfAssets) => {
-    return utils.createAnimation(scene, key, numberOfAssets);
-  };
+  const createPlayerAnimations = (scene, key, nAsset) => utils.createAnimation(scene, key, nAsset);
 
-  const createPlayer = (scene, playerXPosition, playerYPosition, key) => {
-    return scene.physics.add.sprite(
-      playerXPosition,
-      playerYPosition,
-      key
-    );
-  };
+  const createPlayer = (scene, playerXPosition, playerYPosition, key) => scene.physics.add.sprite(
+    playerXPosition,
+    playerYPosition,
+    key,
+  );
 
   const addPhysicsToPlayer = (player, gravityY, depth, bounce, addCollider) => {
     player.setGravityY(gravityY);
@@ -59,8 +55,7 @@ const Player = (() => {
     jump,
     playerRun,
     playerStay,
-  }
-
+  };
 })();
 
 export default Player;
