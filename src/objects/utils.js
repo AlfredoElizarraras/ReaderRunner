@@ -26,9 +26,9 @@ export const createAnimation = (scene, commonKey, numberOfAssets) => {
 
 export const setCollision = (scene, objectToCollideA, objectToCollideB) => {
   scene.physics.add.collider(objectToCollideA, objectToCollideB);
-}
+};
 
-export const moveObjectLeftToRight =(
+export const moveObjectLeftToRight = (
   objectToMove,
   xMovement,
   yMovement,
@@ -41,7 +41,6 @@ export const moveObjectLeftToRight =(
   } else {
     objectToMove.x += xMovement;
   }
-}
+};
 
-export const randomNumber = (min, max) =>
-  Math.floor(Math.random() * (max - min) ) + min;
+export const randomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;

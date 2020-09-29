@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-import * as utils from "./utils";
+import * as utils from './utils';
 
 const Letter = (() => {
   let currentLetterInBox = null;
-  let objLetterBox = null; 
+  let objLetterBox = null;
   let objTextInBox = null;
 
   const loadLetter = (scene, key, path, numberOfAssets) => {
@@ -12,31 +12,31 @@ const Letter = (() => {
 
   const createRandomLetter = () => {
     const lettersArray = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "X",
-      "Y",
-      "Z",
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'X',
+      'Y',
+      'Z',
     ];
     return lettersArray[utils.randomNumber(0, 24)];
   };
@@ -56,38 +56,36 @@ const Letter = (() => {
     centerLetter();
     return objLetterBox;
   };
-  
+
   const changeLetter = (xPositionToChange) => {
     if (objTextInBox.x < xPositionToChange) {
       currentLetterInBox = createRandomLetter();
       objTextInBox.text = currentLetterInBox;
     }
   };
-  
-  const moveLetter = (minimumYMovement, maximumYMovement, xMovement, xPositionToReappear, xPositionToDisappear) => {
-    let letterYMovement = utils.randomNumber(minimumYMovement, maximumYMovement);
+
+  const moveLetter = (minYMovement, maxYMovement, xMove, xPosToReappear, xPosToDisappear) => {
+    const letterYMovement = utils.randomNumber(minYMovement, maxYMovement);
     utils.moveObjectLeftToRight(
       objLetterBox,
-      xMovement,
+      xMove,
       letterYMovement,
-      xPositionToDisappear,
-      xPositionToReappear
+      xPosToDisappear,
+      xPosToReappear,
     );
     utils.moveObjectLeftToRight(
       objTextInBox,
-      xMovement,
+      xMove,
       letterYMovement,
-      xPositionToDisappear,
-      xPositionToReappear
+      xPosToDisappear,
+      xPosToReappear,
     );
-    changeLetter(xPositionToDisappear);
+    changeLetter(xPosToDisappear);
     centerLetter();
     objLetterBox.setVelocityY(0);
   };
 
-  const getCurrentLetterInBox = () => {
-   return currentLetterInBox
-  };
+  const getCurrentLetterInBox = () => currentLetterInBox;
 
   return {
     loadLetter,

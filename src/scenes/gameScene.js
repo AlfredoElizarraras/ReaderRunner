@@ -98,7 +98,7 @@ export default class GameScene extends Phaser.Scene {
       gameLetterOptions.letterYMaximumPosition,
       gameLetterOptions.letterXVelocity * 10,
       gameLetterOptions.letterXReappearPosition,
-      gamePlayerOptions.playerInitialXPosition
+      gamePlayerOptions.playerInitialXPosition,
     );
   }
 
@@ -108,8 +108,8 @@ export default class GameScene extends Phaser.Scene {
       gameLetterOptions.letterXStartPosition,
       gameLetterOptions.letterYStartPosition,
       gameLetterOptions.letterBoxKeyToRender,
-      gameLetterOptions.letterGravityY
-    )
+      gameLetterOptions.letterGravityY,
+    );
     this.physics.add.collider(
       this.player,
       this.letterBox,
@@ -143,9 +143,9 @@ export default class GameScene extends Phaser.Scene {
     this.loadDesert();
     Letter.loadLetter(
       this,
-      gameLetterOptions.letterBoxKey, 
+      gameLetterOptions.letterBoxKey,
       gameLetterOptions.letterBoxPath,
-      gameLetterOptions.letterBoxNumberOfAssets
+      gameLetterOptions.letterBoxNumberOfAssets,
     );
   }
 
@@ -179,7 +179,7 @@ export default class GameScene extends Phaser.Scene {
         gameLetterOptions.letterYMaximumPosition,
         gameLetterOptions.letterXVelocity,
         gameLetterOptions.letterXReappearPosition,
-        gameLetterOptions.letterXDisappearPosition
+        gameLetterOptions.letterXDisappearPosition,
       );
       this.moveObject(
         this.platformOne,
