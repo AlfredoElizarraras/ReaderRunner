@@ -23,3 +23,25 @@ export const createAnimation = (scene, commonKey, numberOfAssets) => {
   });
   return keys;
 };
+
+export const setCollision = (scene, objectToCollideA, objectToCollideB) => {
+  scene.physics.add.collider(objectToCollideA, objectToCollideB);
+}
+
+export const moveObjectLeftToRight =(
+  objectToMove,
+  xMovement,
+  yMovement,
+  xPositionToDisappear,
+  xPositionToReappear,
+) => {
+  if (objectToMove.x < xPositionToDisappear) {
+    objectToMove.x = xPositionToReappear;
+    objectToMove.y = yMovement;
+  } else {
+    objectToMove.x += xMovement;
+  }
+}
+
+export const randomNumber = (min, max) =>
+  Math.floor(Math.random() * (max - min) ) + min;

@@ -3,7 +3,9 @@ import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
 import Player from '../objects/player';
+import Letter from '../objects/letter';
 import * as gamePlayerOptions from '../config/gamePlayerOptions';
+import * as gameLetterOptions from '../config/gameLetterOptions';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -82,52 +84,6 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.existing(this.platformOne, true);
   }
 
-  loadLetter() {
-    this.load.image('letter', '../src/assets/letters/letterBox1.png');
-  }
-
-  createRandomLetter() {
-    const lettersArray = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'X',
-      'Y',
-      'Z',
-    ];
-    return lettersArray[Phaser.Math.Between(0, 24)];
-  }
-
-  moveLetter() {
-    const letterYMovement = Phaser.Math.Between(
-      config.height - 130,
-      config.height - 210,
-    );
-    this.moveObject(this.letterBox, -5, letterYMovement, -30, config.width);
-    this.moveObject(this.text, -5, letterYMovement, -30, config.width);
-    this.changeLetter(-30);
-    Phaser.Display.Align.In.Center(this.text, this.letterBox);
-  }
-
   renderScore() {
     this.score = 0;
     this.scoreText = this.add.text(16, 16, 'score: 0', {
@@ -137,28 +93,24 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectLetter() {
-    if (this.currentLetter === this.text.text) {
-      this.score += 20;
-    } else {
-      this.score -= 10;
-    }
-    this.moveLetter();
-    this.scoreText.setText(`score: ${this.score}`);
+    Letter.moveLetter(
+      gameLetterOptions.letterYMinimumPosition,
+      gameLetterOptions.letterYMaximumPosition,
+      gameLetterOptions.letterXVelocity * 10,
+      gameLetterOptions.letterXReappearPosition,
+      gamePlayerOptions.playerInitialXPosition
+    );
   }
 
   renderLetter() {
-    this.letterBox = this.add.sprite(
-      config.width - 90,
-      config.height - 130,
-      'letter',
-    );
-    this.currentLetter = this.createRandomLetter();
-    this.text = this.add.text(16, 16, this.currentLetter, {
-      fontSize: '28px',
-      fill: '#fff',
-    });
-    Phaser.Display.Align.In.Center(this.text, this.letterBox);
-    this.physics.add.overlap(
+    this.letterBox = Letter.createLetterBox(
+      this,
+      gameLetterOptions.letterXStartPosition,
+      gameLetterOptions.letterYStartPosition,
+      gameLetterOptions.letterBoxKeyToRender,
+      gameLetterOptions.letterGravityY
+    )
+    this.physics.add.collider(
       this.player,
       this.letterBox,
       this.collectLetter,
@@ -186,34 +138,15 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  changeLetter(xPositionToChange) {
-    if (this.letterBox.x < xPositionToChange) {
-      this.text.text = this.createRandomLetter();
-    }
-  }
-
-  playerRun() {
-    this.moveObject(
-      this.platformOne,
-      -5,
-      config.height - 40,
-      -750,
-      config.width,
-    );
-    this.moveObject(
-      this.platformTwo,
-      -5,
-      config.height - 40,
-      -750,
-      config.width,
-    );
-    this.moveLetter();
-  }
-
   preload() {
     this.loadAdventureGirl();
     this.loadDesert();
-    this.loadLetter();
+    Letter.loadLetter(
+      this,
+      gameLetterOptions.letterBoxKey, 
+      gameLetterOptions.letterBoxPath,
+      gameLetterOptions.letterBoxNumberOfAssets
+    );
   }
 
   create() {
@@ -241,7 +174,27 @@ export default class GameScene extends Phaser.Scene {
     }
     if (this.cursors.right.isDown) {
       Player.playerRun(this.player, gamePlayerOptions.playerRunKey);
-      this.playerRun();
+      Letter.moveLetter(
+        gameLetterOptions.letterYMinimumPosition,
+        gameLetterOptions.letterYMaximumPosition,
+        gameLetterOptions.letterXVelocity,
+        gameLetterOptions.letterXReappearPosition,
+        gameLetterOptions.letterXDisappearPosition
+      );
+      this.moveObject(
+        this.platformOne,
+        -5,
+        config.height - 40,
+        -750,
+        config.width,
+      );
+      this.moveObject(
+        this.platformTwo,
+        -5,
+        config.height - 40,
+        -750,
+        config.width,
+      );
     } else {
       Player.playerStay(this.player, gamePlayerOptions.playerStayKey);
     }
