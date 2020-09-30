@@ -1,16 +1,15 @@
 import * as utils from './utils';
 
 const Platform = (() => {
-
   let platformOne = null;
   let platformTwo = null;
-  
+
   const loadPlatform = (scene, key, path, numberOfAssets) => {
     utils.loadImageFolder(scene, key, path, numberOfAssets);
   };
 
-  const createPlatform = (scene, key, platformXPosition, platformYPosition, 
-  platformLenght, platformHeight) => {
+  const createPlatform = (scene, key, platformXPosition, platformYPosition,
+    platformLenght, platformHeight) => {
     platformOne = scene.add.tileSprite(
       platformXPosition,
       platformYPosition,
@@ -32,28 +31,28 @@ const Platform = (() => {
     return platformOne;
   };
 
-  const movePlatform = (xMove, yMove,positionToDisappear, positionToReappear) => {
+  const movePlatform = (xMove, yMove, positionToDisappear, positionToReappear) => {
     utils.moveObjectLeftToRight(
       platformOne,
       xMove,
       yMove,
       positionToDisappear,
-      positionToReappear
+      positionToReappear,
     );
     utils.moveObjectLeftToRight(
       platformTwo,
       xMove,
       yMove,
       positionToDisappear,
-      positionToReappear
+      positionToReappear,
     );
   };
-  
+
   return {
     loadPlatform,
     createPlatform,
     movePlatform,
-  }
+  };
 })();
 
 export default Platform;

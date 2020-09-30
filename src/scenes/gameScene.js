@@ -63,12 +63,12 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadDesert() {
-    this.load.image('bgDessert', `../src/assets/BG.png`);
+    this.load.image('bgDessert', '../src/assets/BG.png');
     Platform.loadPlatform(
       this,
       gamePlatformOptions.platformKey,
       gamePlatformOptions.platformPath,
-      gamePlatformOptions.platformNumberOfAssets
+      gamePlatformOptions.platformNumberOfAssets,
     );
   }
 
@@ -80,9 +80,8 @@ export default class GameScene extends Phaser.Scene {
       gamePlatformOptions.platformXStartPosition,
       gamePlatformOptions.platformYStartPosition,
       gamePlatformOptions.platformLength,
-      gamePlatformOptions.platformHeight
+      gamePlatformOptions.platformHeight,
     );
-
   }
 
   renderScore() {
@@ -94,6 +93,12 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectLetter() {
+    if (this.currentLetter === Letter.getCurrentLetterInBox()){
+      this.score += 20;
+    }
+    else {
+      this.score -= 10;
+    }
     Letter.moveLetter(
       gameLetterOptions.letterYMinimumPosition,
       gameLetterOptions.letterYMaximumPosition,
