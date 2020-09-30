@@ -4,8 +4,11 @@ import config from '../config/config';
 import UiButton from '../objects/uiButton';
 import Player from '../objects/player';
 import Letter from '../objects/letter';
+import Platform from '../objects/platform';
 import * as gamePlayerOptions from '../config/gamePlayerOptions';
 import * as gameLetterOptions from '../config/gameLetterOptions';
+import * as gamePlatformOptions from '../config/gamePlatformOptions';
+import { setCollision } from '../objects/utils';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -60,28 +63,26 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadDesert() {
-    const desertPath = '../src/assets/desert/';
-    this.load.image('bgDessert', `${desertPath}BG.png`);
-    this.load.image('ground', `${desertPath}desertPlatform.png`);
+    this.load.image('bgDessert', `../src/assets/BG.png`);
+    Platform.loadPlatform(
+      this,
+      gamePlatformOptions.platformKey,
+      gamePlatformOptions.platformPath,
+      gamePlatformOptions.platformNumberOfAssets
+    );
   }
 
   renderDesert() {
     this.add.image(config.width / 2, config.height / 2 - 200, 'bgDessert');
-    this.platformOne = this.add.tileSprite(
-      50,
-      config.height - 40,
-      config.width * 2,
-      93,
-      'ground',
+    this.platform = Platform.createPlatform(
+      this,
+      gamePlatformOptions.platformKeyToRender,
+      gamePlatformOptions.platformXStartPosition,
+      gamePlatformOptions.platformYStartPosition,
+      gamePlatformOptions.platformLength,
+      gamePlatformOptions.platformHeight
     );
-    this.platformTwo = this.add.tileSprite(
-      config.width + 1,
-      config.height - 40,
-      config.width * 2,
-      93,
-      'ground',
-    );
-    this.physics.add.existing(this.platformOne, true);
+
   }
 
   renderScore() {
@@ -119,25 +120,6 @@ export default class GameScene extends Phaser.Scene {
     );
   }
 
-  setCollision(objectToCollideA, objectToCollideB) {
-    this.physics.add.collider(objectToCollideA, objectToCollideB);
-  }
-
-  moveObject(
-    objectToMove,
-    xMovement,
-    yMovement,
-    xPositionToDisappear,
-    xPositionToReappear,
-  ) {
-    if (objectToMove.x < xPositionToDisappear) {
-      objectToMove.x = xPositionToReappear;
-      objectToMove.y = yMovement;
-    } else {
-      objectToMove.x += xMovement;
-    }
-  }
-
   preload() {
     this.loadAdventureGirl();
     this.loadDesert();
@@ -153,7 +135,7 @@ export default class GameScene extends Phaser.Scene {
     this.renderDesert();
     this.renderAdventureGirl();
     this.renderScore();
-    this.setCollision(this.player, this.platformOne);
+    setCollision(this, this.player, this.platform);
     this.renderLetter();
 
     this.menuButton = new UiButton(
@@ -181,19 +163,11 @@ export default class GameScene extends Phaser.Scene {
         gameLetterOptions.letterXReappearPosition,
         gameLetterOptions.letterXDisappearPosition,
       );
-      this.moveObject(
-        this.platformOne,
-        -5,
-        config.height - 40,
-        -750,
-        config.width,
-      );
-      this.moveObject(
-        this.platformTwo,
-        -5,
-        config.height - 40,
-        -750,
-        config.width,
+      Platform.movePlatform(
+        gamePlatformOptions.platformXMovement,
+        gamePlatformOptions.platformYMovement,
+        gamePlatformOptions.platformXPositionToDisappear,
+        gamePlatformOptions.platformXPositionToReappear,
       );
     } else {
       Player.playerStay(this.player, gamePlayerOptions.playerStayKey);
