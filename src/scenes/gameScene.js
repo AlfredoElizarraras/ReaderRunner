@@ -73,7 +73,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   renderDesert() {
-    this.add.image(config.width / 2, config.height / 2 - 200, 'bgDessert');
+    this.bg = this.add.image(config.width / 2, config.height / 2 - 200, 'bgDessert');
     this.platform = Platform.createPlatform(
       this,
       gamePlatformOptions.platformKeyToRender,
@@ -90,21 +90,59 @@ export default class GameScene extends Phaser.Scene {
       fontSize: '32px',
       fill: '#000',
     });
+    this.collectedLetters = this.add.text(16, 50, '', {
+      fontSize: '32px',
+      fill: '#006400',
+    });
   }
 
-  collectLetter() {
-    if (this.currentLetter === Letter.getCurrentLetterInBox()){
-      this.score += 20;
+  collectLetter(player, letter) {
+    letter.disableBody(true, true);
+    let currentLetter = Letter.getCurrentLetterInBox();
+    if (this.currentLetter === currentLetter){
+      this.score += this.correctAnswerPoints;
+      this.collectedLetters.text += currentLetter;
+      if (this.word === this.collectedLetters.text) {
+        this.gameOver = true;
+        let username = prompt('What is your name: ');
+        this.gameStatus = this.add.text(0, config.height / 2 - 100, `You WIN: ${username}`, {
+          fontSize: '75px',
+          fill: '#000000',
+        });
+      }
+      else {
+        this.wordToCapture.splice(0, 1);
+        this.currentLetter = this.wordToCapture[0];
+      }
     }
     else {
-      this.score -= 10;
+      if (this.score > 0) {
+        this.gameStatus = null;
+        this.score += this.incorrectAnswerPoints;
+      }
+      else {
+        this.gameStatus = this.add.text(config.width / 2, config.height /2, 'You Lose', {
+          fontSize: '50px',
+          fill: '#e4002a',
+        });
+        Phaser.Display.Align.In.Center(this.gameStatus, this.bg);
+        this.gameOver = true;
+      }
     }
+    this.scoreText.text = `score: ${this.score}`;
+    letter.enableBody(
+      true,
+      gameLetterOptions.letterYMinimumPosition, 
+      gameLetterOptions.letterXReappearPosition,
+      true,
+      true
+    );
     Letter.moveLetter(
       gameLetterOptions.letterYMinimumPosition,
       gameLetterOptions.letterYMaximumPosition,
-      gameLetterOptions.letterXVelocity * 10,
+      gameLetterOptions.letterXVelocity,
       gameLetterOptions.letterXReappearPosition,
-      gamePlayerOptions.playerInitialXPosition,
+      gameLetterOptions.letterXDisappearPosition,
     );
   }
 
@@ -116,7 +154,7 @@ export default class GameScene extends Phaser.Scene {
       gameLetterOptions.letterBoxKeyToRender,
       gameLetterOptions.letterGravityY,
     );
-    this.physics.add.collider(
+    this.physics.add.overlap(
       this.player,
       this.letterBox,
       this.collectLetter,
@@ -134,6 +172,13 @@ export default class GameScene extends Phaser.Scene {
       gameLetterOptions.letterBoxPath,
       gameLetterOptions.letterBoxNumberOfAssets,
     );
+    this.word = 'SAM';
+    this.correctAnswerPoints = 2;
+    this.incorrectAnswerPoints = -1;
+    Letter.loadWordToCollect(this.word);
+    this.wordToCapture = this.word.split('');
+    this.currentLetter = this.wordToCapture[0];
+    this.gameOver = false;
   }
 
   create() {
@@ -156,6 +201,10 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    if (this.gameOver) {
+      Player.playerStay(this.player, gamePlayerOptions.playerStayKey);
+      return;
+    }
     if (this.cursors.up.isDown) {
       Player.jump(this.player, gamePlayerOptions.playerJumpForce);
     }

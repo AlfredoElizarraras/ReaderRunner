@@ -5,40 +5,27 @@ const Letter = (() => {
   let currentLetterInBox = null;
   let objLetterBox = null;
   let objTextInBox = null;
+  let lettersArray = null;
 
   const loadLetter = (scene, key, path, numberOfAssets) => {
     utils.loadImageFolder(scene, key, path, numberOfAssets);
   };
 
+  const loadWordToCollect = (word) => {
+    if (word !== null || word !== '') {
+      word += word + word;
+      let wordArray = word.split('');
+      lettersArray = [];
+      for (let i = 0; i < wordArray.length; i += 1) {
+        for (let j = 0; j < 3; j += 1)
+          lettersArray.push(wordArray[i]);
+      }
+    }
+  };
+
   const createRandomLetter = () => {
-    const lettersArray = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'X',
-      'Y',
-      'Z',
-    ];
-    return lettersArray[utils.randomNumber(0, 24)];
+    let randNum = utils.randomNumber(0, lettersArray.length - 1);
+    return lettersArray[randNum];
   };
 
   const centerLetter = () => {
@@ -89,6 +76,7 @@ const Letter = (() => {
 
   return {
     loadLetter,
+    loadWordToCollect,
     createLetterBox,
     moveLetter,
     getCurrentLetterInBox,
