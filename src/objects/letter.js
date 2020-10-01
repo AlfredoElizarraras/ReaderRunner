@@ -14,17 +14,16 @@ const Letter = (() => {
   const loadWordToCollect = (word) => {
     if (word !== null || word !== '') {
       word += word + word;
-      let wordArray = word.split('');
+      const wordArray = word.split('');
       lettersArray = [];
       for (let i = 0; i < wordArray.length; i += 1) {
-        for (let j = 0; j < 3; j += 1)
-          lettersArray.push(wordArray[i]);
+        for (let j = 0; j < 3; j += 1) lettersArray.push(wordArray[i]);
       }
     }
   };
 
   const createRandomLetter = () => {
-    let randNum = utils.randomNumber(0, lettersArray.length - 1);
+    const randNum = utils.randomNumber(0, lettersArray.length - 1);
     return lettersArray[randNum];
   };
 

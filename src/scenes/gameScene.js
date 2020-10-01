@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-alert */
 import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
@@ -98,44 +99,39 @@ export default class GameScene extends Phaser.Scene {
 
   collectLetter(player, letter) {
     letter.disableBody(true, true);
-    let currentLetter = Letter.getCurrentLetterInBox();
-    if (this.currentLetter === currentLetter){
+    const currentLetter = Letter.getCurrentLetterInBox();
+    if (this.currentLetter === currentLetter) {
       this.score += this.correctAnswerPoints;
       this.collectedLetters.text += currentLetter;
       if (this.word === this.collectedLetters.text) {
         this.gameOver = true;
-        let username = prompt('What is your name: ');
+        const username = prompt('What is your name: ');
         this.gameStatus = this.add.text(0, config.height / 2 - 100, `You WIN: ${username}`, {
           fontSize: '75px',
           fill: '#000000',
         });
-      }
-      else {
+      } else {
         this.wordToCapture.splice(0, 1);
-        this.currentLetter = this.wordToCapture[0];
+        [this.currentLetter] = this.wordToCapture;
       }
-    }
-    else {
-      if (this.score > 0) {
-        this.gameStatus = null;
-        this.score += this.incorrectAnswerPoints;
-      }
-      else {
-        this.gameStatus = this.add.text(config.width / 2, config.height /2, 'You Lose', {
-          fontSize: '50px',
-          fill: '#e4002a',
-        });
-        Phaser.Display.Align.In.Center(this.gameStatus, this.bg);
-        this.gameOver = true;
-      }
+    } else if (this.score > 0) {
+      this.gameStatus = null;
+      this.score += this.incorrectAnswerPoints;
+    } else {
+      this.gameStatus = this.add.text(config.width / 2, config.height / 2, 'You Lose', {
+        fontSize: '50px',
+        fill: '#e4002a',
+      });
+      Phaser.Display.Align.In.Center(this.gameStatus, this.bg);
+      this.gameOver = true;
     }
     this.scoreText.text = `score: ${this.score}`;
     letter.enableBody(
       true,
-      gameLetterOptions.letterYMinimumPosition, 
+      gameLetterOptions.letterYMinimumPosition,
       gameLetterOptions.letterXReappearPosition,
       true,
-      true
+      true,
     );
     Letter.moveLetter(
       gameLetterOptions.letterYMinimumPosition,
@@ -177,7 +173,7 @@ export default class GameScene extends Phaser.Scene {
     this.incorrectAnswerPoints = -1;
     Letter.loadWordToCollect(this.word);
     this.wordToCapture = this.word.split('');
-    this.currentLetter = this.wordToCapture[0];
+    [this.currentLetter] = this.wordToCapture;
     this.gameOver = false;
   }
 
@@ -229,3 +225,4 @@ export default class GameScene extends Phaser.Scene {
   }
 }
 /* eslint-enable no-undef */
+/* eslint-enable no-alert */
