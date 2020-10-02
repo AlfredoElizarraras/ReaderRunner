@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import 'phaser';
-import { getUserName } from '../objects/utils';
+import { getUserName } from './utils';
 
 const Logic = (() => {
   let word;
@@ -29,11 +29,10 @@ const Logic = (() => {
       collectedLetters += collectedLetter;
       if (word === collectedLetters) {
         scene.time.delayedCall(1500, () => {
-          const username;
           // data save score
           // if there is a name in the settings use it
           // if not get the username with prompt
-          username = getUserName();
+          const username = getUserName();
           gameStatusObj.text = `YOU WIN ${username}`;
           gameOver = true;
         }, null, scene);
@@ -62,7 +61,6 @@ const Logic = (() => {
     getScore,
     isGameOver,
   };
-
 })();
 
 export default Logic;

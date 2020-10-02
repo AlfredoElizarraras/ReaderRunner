@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-alert */
 import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
@@ -11,7 +10,7 @@ import * as gamePlayerOptions from '../config/gamePlayerOptions';
 import * as gameLetterOptions from '../config/gameLetterOptions';
 import * as gamePlatformOptions from '../config/gamePlatformOptions';
 import * as gameLogicOptions from '../config/gameLogicOptions';
-import { setCollision, getUserName } from '../objects/utils';
+import { setCollision } from '../objects/utils';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -155,7 +154,7 @@ export default class GameScene extends Phaser.Scene {
     Logic.initializeLogic(
       this.word,
       gameLogicOptions.correctAnswerPoints,
-      gameLogicOptions.incorrectAnswerPoints
+      gameLogicOptions.incorrectAnswerPoints,
     );
     Letter.loadWordToCollect(this.word);
   }

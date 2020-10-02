@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import 'phaser';
 
 export const loadImageFolder = (scene, commonKey, commonPath, numberOfAssets) => {
@@ -52,3 +53,4 @@ export const getUserName = () => {
   }
   return username.toUpperCase();
 };
+/* eslint-enable no-alert */
