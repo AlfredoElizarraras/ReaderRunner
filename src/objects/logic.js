@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import { getUserName } from './utils';
-import { saveScore } from './data';
+import { saveScore, getScores } from './data';
 
 const Logic = (() => {
   let word;
@@ -36,6 +36,9 @@ const Logic = (() => {
           saveScore(username, score).then((response) => {
             console.log(response);
             alert(response);
+          });
+          getScores().then((scores) => {
+            console.log(scores);
           });
         }, null, scene);
       } else {

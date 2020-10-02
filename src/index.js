@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import 'phaser';
-import config from './config/config';
+import config from './config/config'
 import GameScene from './scenes/gameScene';
 import BootScene from './scenes/bootScene';
 import PreloaderScene from './scenes/preloaderScene';
