@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import { getUserName } from './utils';
+import { saveScore } from './data';
 
 const Logic = (() => {
   let word;
@@ -29,12 +30,13 @@ const Logic = (() => {
       collectedLetters += collectedLetter;
       if (word === collectedLetters) {
         scene.time.delayedCall(1500, () => {
-          // data save score
-          // if there is a name in the settings use it
-          // if not get the username with prompt
           const username = getUserName();
           gameStatusObj.text = `YOU WIN ${username}`;
           gameOver = true;
+          saveScore(username, score).then((response) => {
+            console.log(response);
+            alert(response);
+          });
         }, null, scene);
       } else {
         wordToCapture.splice(0, 1);
