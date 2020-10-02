@@ -150,7 +150,7 @@ export default class GameScene extends Phaser.Scene {
       gameLetterOptions.letterBoxPath,
       gameLetterOptions.letterBoxNumberOfAssets,
     );
-    this.word = 'SAMA';
+    this.word = 'SAM';
     Logic.initializeLogic(
       this.word,
       gameLogicOptions.correctAnswerPoints,

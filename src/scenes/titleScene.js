@@ -41,7 +41,6 @@ export default class TitleScene extends Phaser.Scene {
     this.settingsButton = new UiButton(this, config.width / 2, 322, 'redButton', 'greenButton', 'Settings', 'Options');
     this.creditsButton = new UiButton(this, config.width / 2, 433, 'redButton', 'greenButton', 'Credits', 'Credits');
 
-
     this.model = this.sys.game.globals.model;
 
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {

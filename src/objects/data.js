@@ -1,7 +1,7 @@
 const id = 'lU9pb0qidDFidGLicvES';
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores`;
 
-export const saveScore = async function (playerName, score) {
+export async function saveScore(playerName, score) {
   const newscore = {
     user: playerName,
     score,
@@ -19,7 +19,7 @@ export const saveScore = async function (playerName, score) {
     .then(response => response.json())
     .then(response => response)
     .catch(err => err);
-};
+}
 
 export const getScores = async () => fetch(url, {
   mode: 'cors',

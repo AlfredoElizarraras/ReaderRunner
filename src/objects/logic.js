@@ -22,6 +22,11 @@ const Logic = (() => {
     score = 0;
     gameOver = false;
     collectedLetters = '';
+    getScores().then((scores) => {
+      for (let i = 0; i < scores.result.length; i += 1) {
+        console.log(`player: ${scores.result[i].user}, score: ${scores.result[i].score}`);
+      }
+    });
   };
 
   const checkGameStatus = (scene, collectedLetter, gameStatusObj) => {
@@ -33,13 +38,7 @@ const Logic = (() => {
           const username = getUserName();
           gameStatusObj.text = `YOU WIN ${username}`;
           gameOver = true;
-          saveScore(username, score).then((response) => {
-            console.log(response);
-            alert(response);
-          });
-          getScores().then((scores) => {
-            console.log(scores);
-          });
+          saveScore(username, score);
         }, null, scene);
       } else {
         wordToCapture.splice(0, 1);
