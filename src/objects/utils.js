@@ -44,3 +44,11 @@ export const moveObjectLeftToRight = (
 };
 
 export const randomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+
+export const getUserName = () => {
+  let username = prompt('What is your name \n(max 8 chars): ');
+  while (username.length > 8) {
+    username = prompt('The username must be less than 8 chars: ');
+  }
+  return username.toUpperCase();
+};

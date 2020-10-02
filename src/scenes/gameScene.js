@@ -6,10 +6,12 @@ import UiButton from '../objects/uiButton';
 import Player from '../objects/player';
 import Letter from '../objects/letter';
 import Platform from '../objects/platform';
+import Logic from '../objects/logic';
 import * as gamePlayerOptions from '../config/gamePlayerOptions';
 import * as gameLetterOptions from '../config/gameLetterOptions';
 import * as gamePlatformOptions from '../config/gamePlatformOptions';
-import { setCollision } from '../objects/utils';
+import * as gameLogicOptions from '../config/gameLogicOptions';
+import { setCollision, getUserName } from '../objects/utils';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -95,37 +97,18 @@ export default class GameScene extends Phaser.Scene {
       fontSize: '32px',
       fill: '#006400',
     });
+    this.gameStatus = this.add.text(0, 180, '', {
+      fontSize: '65px',
+      fill: '#e4002a',
+    });
   }
 
   collectLetter(player, letter) {
     letter.disableBody(true, true);
     const currentLetter = Letter.getCurrentLetterInBox();
-    if (this.currentLetter === currentLetter) {
-      this.score += this.correctAnswerPoints;
-      this.collectedLetters.text += currentLetter;
-      if (this.word === this.collectedLetters.text) {
-        this.gameOver = true;
-        const username = prompt('What is your name: ');
-        this.gameStatus = this.add.text(0, config.height / 2 - 100, `You WIN: ${username}`, {
-          fontSize: '75px',
-          fill: '#000000',
-        });
-      } else {
-        this.wordToCapture.splice(0, 1);
-        [this.currentLetter] = this.wordToCapture;
-      }
-    } else if (this.score > 0) {
-      this.gameStatus = null;
-      this.score += this.incorrectAnswerPoints;
-    } else {
-      this.gameStatus = this.add.text(config.width / 2, config.height / 2, 'You Lose', {
-        fontSize: '50px',
-        fill: '#e4002a',
-      });
-      Phaser.Display.Align.In.Center(this.gameStatus, this.bg);
-      this.gameOver = true;
-    }
-    this.scoreText.text = `score: ${this.score}`;
+    Logic.checkGameStatus(this, currentLetter, this.gameStatus);
+    this.scoreText.text = `score: ${Logic.getScore()}`;
+    this.collectedLetters.text = Logic.getCollectedLetters();
     letter.enableBody(
       true,
       gameLetterOptions.letterYMinimumPosition,
@@ -168,13 +151,13 @@ export default class GameScene extends Phaser.Scene {
       gameLetterOptions.letterBoxPath,
       gameLetterOptions.letterBoxNumberOfAssets,
     );
-    this.word = 'SAM';
-    this.correctAnswerPoints = 2;
-    this.incorrectAnswerPoints = -1;
+    this.word = 'GLORIA';
+    Logic.initializeLogic(
+      this.word,
+      gameLogicOptions.correctAnswerPoints,
+      gameLogicOptions.incorrectAnswerPoints
+    );
     Letter.loadWordToCollect(this.word);
-    this.wordToCapture = this.word.split('');
-    [this.currentLetter] = this.wordToCapture;
-    this.gameOver = false;
   }
 
   create() {
@@ -197,8 +180,11 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    if (this.gameOver) {
+    if (Logic.isGameOver()) {
       Player.playerStay(this.player, gamePlayerOptions.playerStayKey);
+      this.time.delayedCall(2000, () => {
+        this.scene.start(this);
+      }, null, this);
       return;
     }
     if (this.cursors.up.isDown) {
