@@ -1,7 +1,4 @@
 /* eslint-disable no-undef */
-import 'phaser';
-import { getUserName } from './utils';
-import { saveScore } from './data';
 
 const Logic = (() => {
   let word;
@@ -12,6 +9,7 @@ const Logic = (() => {
   let score = 0;
   let gameOver;
   let collectedLetters = '';
+  let isWinner;
 
   const initializeLogic = (wordToLearn, correctPoints, incorrectPoints) => {
     word = wordToLearn;
@@ -21,20 +19,17 @@ const Logic = (() => {
     [currentLetter] = wordToCapture;
     score = 0;
     gameOver = false;
+    isWinner = null;
     collectedLetters = '';
   };
 
-  const checkGameStatus = (scene, collectedLetter, gameStatusObj) => {
+  const checkGameStatus = (collectedLetter) => {
     if (collectedLetter === currentLetter) {
       score += correctAnswerPoints;
       collectedLetters += collectedLetter;
       if (word === collectedLetters) {
-        scene.time.delayedCall(1500, () => {
-          const username = getUserName();
-          gameStatusObj.text = `YOU WIN ${username}`;
-          gameOver = true;
-          saveScore(username, score);
-        }, null, scene);
+        isWinner = true;
+        gameOver = true;
       } else {
         wordToCapture.splice(0, 1);
         [currentLetter] = wordToCapture;
@@ -42,7 +37,7 @@ const Logic = (() => {
     } else if (score > 0) {
       score += incorrectAnswerPoints;
     } else {
-      gameStatusObj.text = 'You lose';
+      isWinner = false;
       gameOver = true;
     }
   };
@@ -53,12 +48,15 @@ const Logic = (() => {
 
   const getCollectedLetters = () => collectedLetters;
 
+  const playerWon = () => isWinner;
+
   return {
     initializeLogic,
     checkGameStatus,
     getCollectedLetters,
     getScore,
     isGameOver,
+    playerWon,
   };
 })();
 

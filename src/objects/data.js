@@ -9,6 +9,7 @@ export async function saveScore(playerName, score) {
 
   const request = new Request(url, {
     method: 'POST',
+    mode: 'cors',
     body: JSON.stringify(newscore),
     headers: new Headers({
       'Content-Type': 'application/json',

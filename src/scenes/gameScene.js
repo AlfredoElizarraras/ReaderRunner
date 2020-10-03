@@ -10,7 +10,8 @@ import * as gamePlayerOptions from '../config/gamePlayerOptions';
 import * as gameLetterOptions from '../config/gameLetterOptions';
 import * as gamePlatformOptions from '../config/gamePlatformOptions';
 import * as gameLogicOptions from '../config/gameLogicOptions';
-import { setCollision } from '../objects/utils';
+import { setCollision, getUserName } from '../objects/utils';
+import { saveScore } from '../objects/data';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -105,7 +106,7 @@ export default class GameScene extends Phaser.Scene {
   collectLetter(player, letter) {
     letter.disableBody(true, true);
     const currentLetter = Letter.getCurrentLetterInBox();
-    Logic.checkGameStatus(this, currentLetter, this.gameStatus);
+    Logic.checkGameStatus(currentLetter);
     this.scoreText.text = `score: ${Logic.getScore()}`;
     this.collectedLetters.text = Logic.getCollectedLetters();
     letter.enableBody(
@@ -181,6 +182,15 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if (Logic.isGameOver()) {
       Player.playerStay(this.player, gamePlayerOptions.playerStayKey);
+      this.time.delayedCall(1500, () => {
+        if (Logic.playerWon()) {
+          const username = getUserName();
+          this.gameStatus.text = `YOU WIN ${username}`;
+          saveScore(username, Logic.getScore());
+        } else {
+          this.gameStatus.text = 'YOU LOSE';
+        }
+      }, null, this);
       this.time.delayedCall(2000, () => {
         this.scene.start(this);
       }, null, this);
