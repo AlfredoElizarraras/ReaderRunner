@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import { getUserName } from './utils';
-import { saveScore, getScores } from './data';
+import { saveScore } from './data';
 
 const Logic = (() => {
   let word;
@@ -22,11 +22,6 @@ const Logic = (() => {
     score = 0;
     gameOver = false;
     collectedLetters = '';
-    getScores().then((scores) => {
-      for (let i = 0; i < scores.result.length; i += 1) {
-        console.log(`player: ${scores.result[i].user}, score: ${scores.result[i].score}`);
-      }
-    });
   };
 
   const checkGameStatus = (scene, collectedLetter, gameStatusObj) => {

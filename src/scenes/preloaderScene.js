@@ -11,7 +11,6 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start('Title'); // erase this line to show the game logo a minimum of time.
     this.readyCount += 1;
     if (this.readyCount === 2) {
       this.scene.start('Title');
