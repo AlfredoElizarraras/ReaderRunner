@@ -5,6 +5,7 @@ import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
 import { getScores } from '../objects/data';
+import { sortScores } from '../objects/utils';
 
 export default class LeaderBoard extends Phaser.Scene {
   constructor() {
@@ -22,8 +23,12 @@ export default class LeaderBoard extends Phaser.Scene {
         config.height,
       );
 
-      for (let i = 0; i < scores.result.length; i += 1) {
-        this.scores += `PLAYER: ${scores.result[i].user}, SCORE: ${scores.result[i].score}\n`;
+      const sortedScores = sortScores(scores.result);
+
+      for (let i = 0; i < sortedScores.length; i += 1) {
+        this.scores += `Place ${i + 1}: `;
+        this.scores += `PLAYER: ${sortedScores[i].user}`;
+        this.scores += `, SCORE: ${sortedScores[i].score}\n`;
       }
       this.madeByText = this.add.text(0, 0, this.scores, {
         fontSize: '12px',

@@ -65,4 +65,10 @@ export const getUserName = () => {
   }
   return username.toUpperCase();
 };
+
+export const sortScores = (scores) => {
+  const scoresToSort = [...scores];
+  const sortedScores = scoresToSort.sort((a, b) => b.score - a.score);
+  return sortedScores.splice(0, 10);
+};
 /* eslint-enable no-alert */

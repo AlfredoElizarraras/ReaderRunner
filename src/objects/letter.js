@@ -19,7 +19,7 @@ const Letter = (() => {
       for (let i = 0; i < wordArray.length; i += 1) {
         for (let j = 0; j < 3; j += 1) lettersArray.push(wordArray[i]);
       }
-      currentLetterInBox = lettersArray[0];
+      [currentLetterInBox] = lettersArray;
     }
   };
 
