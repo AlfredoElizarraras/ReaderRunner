@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import * as utils from './utils';
+import { loadImageFolder, moveObjectLeftToRight, randomNumber } from './utils';
 
 const Letter = (() => {
   let currentLetterInBox = null;
@@ -8,7 +8,7 @@ const Letter = (() => {
   let lettersArray = null;
 
   const loadLetter = (scene, key, path, numberOfAssets) => {
-    utils.loadImageFolder(scene, key, path, numberOfAssets);
+    loadImageFolder(scene, key, path, numberOfAssets);
   };
 
   const loadWordToCollect = (word) => {
@@ -19,11 +19,12 @@ const Letter = (() => {
       for (let i = 0; i < wordArray.length; i += 1) {
         for (let j = 0; j < 3; j += 1) lettersArray.push(wordArray[i]);
       }
+      currentLetterInBox = lettersArray[0];
     }
   };
 
   const createRandomLetter = () => {
-    const randNum = utils.randomNumber(0, lettersArray.length - 1);
+    const randNum = randomNumber(0, lettersArray.length - 1);
     return lettersArray[randNum];
   };
 
@@ -51,15 +52,15 @@ const Letter = (() => {
   };
 
   const moveLetter = (minYMovement, maxYMovement, xMove, xPosToReappear, xPosToDisappear) => {
-    const letterYMovement = utils.randomNumber(minYMovement, maxYMovement);
-    utils.moveObjectLeftToRight(
+    const letterYMovement = randomNumber(minYMovement, maxYMovement);
+    moveObjectLeftToRight(
       objLetterBox,
       xMove,
       letterYMovement,
       xPosToDisappear,
       xPosToReappear,
     );
-    utils.moveObjectLeftToRight(
+    moveObjectLeftToRight(
       objTextInBox,
       xMove,
       letterYMovement,

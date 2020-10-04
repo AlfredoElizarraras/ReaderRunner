@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-import 'phaser';
 import { setConfig, getConfig } from './data';
 
 export const loadImageFolder = (
