@@ -14,24 +14,12 @@ export default class OptionsScene extends Phaser.Scene {
     this.musicButton = this.add.image(200, 200, 'redTick');
     this.musicText = this.add.text(250, 190, 'Music Enabled', { fontSize: 24 });
 
-    this.soundButton = this.add.image(200, 300, 'redTick');
-    this.soundText = this.add.text(250, 290, 'Sound Enabled', { fontSize: 24 });
-
     this.musicButton.setInteractive();
-    this.soundButton.setInteractive();
 
     this.musicButton.on(
       'pointerdown',
       () => {
         this.model.musicOn = !this.model.musicOn;
-        this.updateAudio();
-      },
-    );
-
-    this.soundButton.on(
-      'pointerdown',
-      () => {
-        this.model.soundOn = !this.model.soundOn;
         this.updateAudio();
       },
     );
@@ -52,12 +40,6 @@ export default class OptionsScene extends Phaser.Scene {
         this.sys.game.globals.bgMusic.play();
         this.model.bgMusicPlaying = true;
       }
-    }
-
-    if (this.model.soundOn === false) {
-      this.soundButton.setTexture('grayTick');
-    } else {
-      this.soundButton.setTexture('redTick');
     }
   }
 }
