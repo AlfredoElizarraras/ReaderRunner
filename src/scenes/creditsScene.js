@@ -9,8 +9,8 @@ export default class CreditsScene extends Phaser.Scene {
     super('Credits');
   }
 
-  preload () {
-    this.credits =  'Created By: \nOscar Alfredo Gómez Elizarrarás\n\n\n';
+  preload() {
+    this.credits = 'Created By: \nOscar Alfredo Gómez Elizarrarás\n\n\n';
     this.credits += 'Game requirements by: \nMicroverse\n\n\n';
     this.credits += 'Adventure Girl by: \npzUH on OpenGameArt\n\n\n';
     this.credits += 'Desert background and tile by: \npzUH\n\n\n';
