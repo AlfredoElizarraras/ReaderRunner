@@ -29,15 +29,12 @@ module.exports = {
         use: [{ loader: 'html-loader' }],
       },
 
-      // FILE LOADER - images
+      // FILE LOADER
       {
         test: /\.(ogg|mp3|png|svg|jpe?g|gif)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'img/[name].[ext]',
-          output: 'img/',
-          publicPath: '../',
-        },
+        use: [
+          'file-loader',
+        ]
       },
     ],
   },
