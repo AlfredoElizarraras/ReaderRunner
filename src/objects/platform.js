@@ -1,11 +1,12 @@
 import * as utils from './utils';
+import platform from '../assets/platform/platform0.png';
 
 const Platform = (() => {
   let platformOne = null;
   let platformTwo = null;
 
-  const loadPlatform = (scene, key, path, numberOfAssets) => {
-    utils.loadImageFolder(scene, key, path, numberOfAssets);
+  const loadPlatform = (scene) => {
+    scene.load.image('platform0', platform);
   };
 
   const createPlatform = (scene, key, platformXPosition, platformYPosition,

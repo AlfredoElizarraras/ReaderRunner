@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
 import 'phaser';
+import redTick from '../assets/ui/redTick.png';
+import grayTick from '../assets/ui/grayTick.png';
+import redButton from '../assets/ui/redButton.png';
+import greenButton from '../assets/ui/greenButton.png';
+import audio from '../assets/audio/TownTheme.ogg';
+import logo from '../assets/microverselogo.png';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -93,16 +99,17 @@ export default class PreloaderScene extends Phaser.Scene {
 
   loadGameAssets() {
     // load assets needed in our game
-    this.load.image('redTick', '../src/assets/ui/redTick.png');
-    this.load.image('grayTick', '../src/assets/ui/grayTick.png');
-    this.load.image('redButton', '../src/assets/ui/redButton.png');
-    this.load.image('greenButton', '../src/assets/ui/greenButton.png');
-    this.load.audio('bgMusic', ['../src/assets/audio/TownTheme.ogg']);
+    this.load.image('redTick', redTick);
+    this.load.image('grayTick', grayTick);
+    this.load.image('redButton', redButton);
+    this.load.image('greenButton', greenButton);
+    this.load.audio('bgMusic', [audio]);
+    this.load.image('logo', logo);
+    this.displayProgressBar();
   }
 
   preload() {
     this.displayProgressBar();
-
     this.loadGameAssets();
   }
 }

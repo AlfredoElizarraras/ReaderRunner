@@ -1,8 +1,6 @@
-export const playerStayPath = '../src/assets/adventureGirl/stay/adventureGirlStay';
-
-export const playerRunPath = '../src/assets/adventureGirl/run/adventureGirlRun';
-
 export const playerStayKey = 'playerStay';
+
+export const playerStayKeyToRender = 'playerStay0';
 
 export const playerRunKey = 'playerRun';
 

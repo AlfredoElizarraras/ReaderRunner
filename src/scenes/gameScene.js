@@ -12,6 +12,7 @@ import * as gamePlatformOptions from '../config/gamePlatformOptions';
 import * as gameLogicOptions from '../config/gameLogicOptions';
 import { setCollision, getUserName } from '../objects/utils';
 import { saveScore } from '../objects/data';
+import bg from '../assets/BG.png';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -19,41 +20,17 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadAdventureGirl() {
-    // stay
-    Player.loadPlayer(
-      this,
-      gamePlayerOptions.playerStayKey,
-      gamePlayerOptions.playerStayPath,
-      gamePlayerOptions.playerStayNumberOfAssets,
-    );
-
-    // run
-    Player.loadPlayer(
-      this,
-      gamePlayerOptions.playerRunKey,
-      gamePlayerOptions.playerRunPath,
-      gamePlayerOptions.playerRunNumberOfAssets,
-    );
+    Player.loadPlayer(this);
   }
 
   renderAdventureGirl() {
-    this.playerStayKeyFrames = Player.createPlayerAnimations(
-      this,
-      gamePlayerOptions.playerStayKey,
-      gamePlayerOptions.playerStayNumberOfAssets,
-    );
-
-    this.playerRunKeyFrames = Player.createPlayerAnimations(
-      this,
-      gamePlayerOptions.playerRunKey,
-      gamePlayerOptions.playerRunNumberOfAssets,
-    );
+    Player.createPlayerAnimations(this);
 
     this.player = Player.createPlayer(
       this,
       gamePlayerOptions.playerInitialXPosition,
       gamePlayerOptions.playerInitialYPosition,
-      this.playerStayKeyFrames[0].key,
+      gamePlayerOptions.playerStayKeyToRender,
     );
 
     Player.addPhysicsToPlayer(
@@ -66,13 +43,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadDesert() {
-    this.load.image('bgDessert', '../src/assets/BG.png');
-    Platform.loadPlatform(
-      this,
-      gamePlatformOptions.platformKey,
-      gamePlatformOptions.platformPath,
-      gamePlatformOptions.platformNumberOfAssets,
-    );
+    this.load.image('bgDessert', bg);
+    Platform.loadPlatform(this);
   }
 
   renderDesert() {
