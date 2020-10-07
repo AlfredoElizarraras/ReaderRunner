@@ -2,8 +2,6 @@ export const letterBoxPath = '../src/assets/letters/letterBox';
 
 export const letterBoxKey = 'letterBox';
 
-export const letterBoxKeyToRender = 'letterBox0';
-
 export const letterBoxNumberOfAssets = 1;
 
 export const letterYStartPosition = 370;

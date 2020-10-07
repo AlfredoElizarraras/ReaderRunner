@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-import { loadImageFolder, moveObjectLeftToRight, randomNumber } from './utils';
+import { moveObjectLeftToRight, randomNumber } from './utils';
+import letterBox from '../assets/letters/letterBox.png';
 
 const Letter = (() => {
   let currentLetterInBox = null;
@@ -7,8 +8,8 @@ const Letter = (() => {
   let objTextInBox = null;
   let lettersArray = null;
 
-  const loadLetter = (scene, key, path, numberOfAssets) => {
-    loadImageFolder(scene, key, path, numberOfAssets);
+  const loadLetter = (scene, key) => {
+    scene.load.image(key, letterBox);
   };
 
   const loadWordToCollect = (word) => {

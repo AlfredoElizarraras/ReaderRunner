@@ -130,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
       this,
       gameLetterOptions.letterXStartPosition,
       gameLetterOptions.letterYStartPosition,
-      gameLetterOptions.letterBoxKeyToRender,
+      gameLetterOptions.letterBoxKey,
       gameLetterOptions.letterGravityY,
     );
     this.physics.add.overlap(
@@ -148,8 +148,6 @@ export default class GameScene extends Phaser.Scene {
     Letter.loadLetter(
       this,
       gameLetterOptions.letterBoxKey,
-      gameLetterOptions.letterBoxPath,
-      gameLetterOptions.letterBoxNumberOfAssets,
     );
     this.word = 'SAM';
     Logic.initializeLogic(
