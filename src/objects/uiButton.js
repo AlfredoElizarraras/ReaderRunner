@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable import/no-unresolved */
 import 'phaser';
 
 export default class UiButton extends Phaser.GameObjects.Container {
@@ -31,3 +32,4 @@ export default class UiButton extends Phaser.GameObjects.Container {
   }
 }
 /* eslint-enable no-undef */
+/* eslint-enable import/no-unresolved */

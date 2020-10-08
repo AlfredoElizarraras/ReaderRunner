@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable import/no-unresolved */
 import 'phaser';
 import config from '../config/config';
 
@@ -67,3 +68,4 @@ export default class CreditsScene extends Phaser.Scene {
 /* eslint-enable no-unused-expressions */
 /* eslint-enable no-undef */
 /* eslint-enable func-names */
+/* eslint-enable import/no-unresolved */

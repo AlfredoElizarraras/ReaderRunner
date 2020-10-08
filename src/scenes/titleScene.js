@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable import/no-unresolved */
 import 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
@@ -52,3 +53,4 @@ export default class TitleScene extends Phaser.Scene {
   }
 }
 /* eslint-enable no-undef */
+/* eslint-enable import/no-unresolved */
