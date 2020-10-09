@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const id = 'lU9pb0qidDFidGLicvES';
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores`;
 
@@ -33,8 +34,7 @@ export const getScores = async () => {
   } catch (error) {
     localStorage.setItem('error', `${error}`);
   }
-} 
-
+};
 
 export const setConfig = (configKey, value) => {
   if ((value !== null || value !== undefined)
@@ -52,3 +52,4 @@ export const getConfig = (configKey) => {
   }
   return value;
 };
+/* eslint-enable consistent-return */
