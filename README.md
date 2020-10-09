@@ -2,16 +2,20 @@
  :runner: Reader Runner :book:
 </h1>
 
+![Quick Demo](/assets/ReaderRunnerDemo.gif?raw=true "Quick Demo")
+
 
 ## Table of Contents
 
 * [About the Project](#about-the-project)
+* [GDD](#game-design-document)
 * [Video Presentation](#video-presentation)
 * [Live Demo](#live-demo)
 * [Project Management](#project-management)
 * [Built With](#built-with)
 * [Prerequisites](#prerequisites)
 * [Getting started](#getting-started)
+* [How to play](#how-to-play)
 * [Authors](#authors)
 * [Contributing](#contributing)
 * [Acknowledgments](#acknowledgments)
@@ -22,10 +26,13 @@
 
 > An educational JavaScript game created with Phaser 3.
 
+## Game design document
+
+https://github.com/AlfredoElizarraras/ReaderRunner/wiki
+
 ## Video Presentations
 
-Coming soon
-
+https://youtu.be/VXR2mxZoKIk
 
 ## Built With
 
@@ -35,17 +42,14 @@ Coming soon
 
 ## Live Demo
 
-Coming soon
-
-## Project Management
-
-You can found the Kanban of this project [here](https://github.com/users/AlfredoElizarraras/projects/4)
+https://readerrunner-afc29.web.app/
 
 ### Prerequisites
 
 - node v13.14.0
 - npm 6.14.8
-- phaser 2
+- phaser 3
+- webpack
 
 ## Getting Started
 
@@ -58,6 +62,11 @@ To get a local copy up and running follow these simple example steps
   ```
 - Change directory to ReaderRunner folder.
 - npm install
+
+## How to play
+
+- Up arrow to jump.
+- Right arrow to run.
 
 ## Author
 
@@ -77,11 +86,19 @@ Give a ⭐️ if you like this project!
 
 - [Microverse](https://microverse.org)
 - [Odin project](https://www.theodinproject.com/)
+- [Adventure girl and desert assets by: pzUH from OpenGameArt](https://opengameart.org/content/adventurer-girl-free-sprite)
+- [Music by: CleytonKauffman](https://opengameart.org/users/cleytonkauffman)
+- [Game template by: Scott Westover on Zenva tutorials](https://phasertutorials.com/creating-a-phaser-3-template-part-1/)
+- [Game ui buttons](https://www.gameart2d.com/free-game-gui.html)
 ---
 
 ## Screen shots
 
-Coming soon
+![MainMenu](/assets/MainMenu.png?raw=true "Mainmenu")
+![Game](/assets/Game.png?raw=true "Game")
+![LeaderBoard](/assets/LeaderBoard.png?raw=true "LeaderBoard")
+![Settings](/assets/Settings.png?raw=true "Settings")
+![Credits](/assets/Credits.png?raw=true "Credits")
 
 ---
 
