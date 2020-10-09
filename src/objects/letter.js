@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+import Phaser from 'phaser';
 import { moveObjectLeftToRight, randomNumber } from './utils';
 import letterBox from '../assets/letters/letterBox.png';
 
@@ -85,4 +85,3 @@ const Letter = (() => {
 })();
 
 export default Letter;
-/* eslint-enable no-undef */

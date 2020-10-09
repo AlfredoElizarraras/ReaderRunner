@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class UiButton extends Phaser.GameObjects.Container {
   constructor(scene, x, y, key1, key2, text, targetScene) {
@@ -31,5 +29,3 @@ export default class UiButton extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
   }
 }
-/* eslint-enable no-undef */
-/* eslint-enable import/no-unresolved */

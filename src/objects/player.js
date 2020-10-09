@@ -45,7 +45,6 @@ const Player = (() => {
   };
 
   const createPlayerAnimations = (scene) => {
-    //  return utils.createAnimation(scene, key, nAsset);
     scene.anims.create({
       key: 'playerStay',
       frames: [

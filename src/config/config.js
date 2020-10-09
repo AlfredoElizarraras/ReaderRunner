@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
-import 'phaser';
+import Phaser from 'phaser';
 
 export default {
   type: Phaser.AUTO,
@@ -15,5 +13,3 @@ export default {
     },
   },
 };
-/* eslint-enable no-undef */
-/* eslint-enable import/no-unresolved */

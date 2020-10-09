@@ -1,8 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable import/no-unresolved */
-import 'phaser';
+import Phaser from 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
 import { getScores } from '../objects/data';
@@ -40,7 +36,3 @@ export default class LeaderBoard extends Phaser.Scene {
     });
   }
 }
-/* eslint-enable no-unused-expressions */
-/* eslint-enable no-undef */
-/* eslint-enable func-names */
-/* eslint-enable import/no-unresolved */

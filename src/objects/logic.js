@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 const Logic = (() => {
   let word;
   let wordToCapture;
@@ -61,4 +59,3 @@ const Logic = (() => {
 })();
 
 export default Logic;
-/* eslint-enable no-undef */

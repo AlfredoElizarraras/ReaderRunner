@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
-import 'phaser';
+import Phaser from 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
 import Player from '../objects/player';
@@ -190,6 +188,3 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 }
-/* eslint-enable no-undef */
-/* eslint-enable no-alert */
-/* eslint-enable import/no-unresolved */

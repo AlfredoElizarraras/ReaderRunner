@@ -1,8 +1,5 @@
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 /* eslint-disable no-unused-expressions */
-/* eslint-disable import/no-unresolved */
-import 'phaser';
+import Phaser from 'phaser';
 import config from '../config/config';
 
 export default class CreditsScene extends Phaser.Scene {
@@ -58,14 +55,11 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 23000,
       delay: 1000,
-      onComplete: function () {
+      onComplete: () => {
         this.madeByTween.destroy;
         this.scene.start('Title');
-      }.bind(this),
+      },
     });
   }
 }
 /* eslint-enable no-unused-expressions */
-/* eslint-enable no-undef */
-/* eslint-enable func-names */
-/* eslint-enable import/no-unresolved */
