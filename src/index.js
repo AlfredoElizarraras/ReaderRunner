@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../src/phaser/phaser.min.js';
 import config from './config/config';
 import GameScene from './scenes/gameScene';
 import BootScene from './scenes/bootScene';
