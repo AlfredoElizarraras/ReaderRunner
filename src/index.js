@@ -1,4 +1,5 @@
-import Phaser from '../src/phaser/phaser.min.js';
+/* eslint-disable import/no-unresolved */
+import Phaser from 'phaser';
 import config from './config/config';
 import GameScene from './scenes/gameScene';
 import BootScene from './scenes/bootScene';
@@ -26,3 +27,4 @@ class Game extends Phaser.Game {
 }
 
 window.game = new Game();
+/* eslint-enable import/no-unresolved */

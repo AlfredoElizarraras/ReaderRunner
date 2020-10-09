@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import config from '../config/config';
 import UiButton from '../objects/uiButton';
@@ -50,3 +51,4 @@ export default class TitleScene extends Phaser.Scene {
     }
   }
 }
+/* eslint-enable import/no-unresolved */

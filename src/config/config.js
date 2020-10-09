@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 
 export default {
@@ -13,3 +14,4 @@ export default {
     },
   },
 };
+/* eslint-enable import/no-unresolved */

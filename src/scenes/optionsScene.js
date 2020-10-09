@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import UiButton from '../objects/uiButton';
 
@@ -42,3 +43,4 @@ export default class OptionsScene extends Phaser.Scene {
     }
   }
 }
+/* eslint-enable import/no-unresolved */

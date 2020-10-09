@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import redTick from '../assets/ui/redTick.png';
 import grayTick from '../assets/ui/grayTick.png';
@@ -112,3 +113,4 @@ export default class PreloaderScene extends Phaser.Scene {
     this.loadGameAssets();
   }
 }
+/* eslint-enable import/no-unresolved */

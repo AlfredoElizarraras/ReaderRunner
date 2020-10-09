@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import logo from '../assets/microverselogo.png';
 
@@ -14,3 +15,4 @@ export default class BootScene extends Phaser.Scene {
     this.scene.start('Preloader');
   }
 }
+/* eslint-enable import/no-unresolved */

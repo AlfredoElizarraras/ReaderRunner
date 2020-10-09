@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 
 export default class UiButton extends Phaser.GameObjects.Container {
@@ -29,3 +30,4 @@ export default class UiButton extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
   }
 }
+/* eslint-enable import/no-unresolved */

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import { moveObjectLeftToRight, randomNumber } from './utils';
 import letterBox from '../assets/letters/letterBox.png';
@@ -85,3 +86,4 @@ const Letter = (() => {
 })();
 
 export default Letter;
+/* eslint-enable import/no-unresolved */

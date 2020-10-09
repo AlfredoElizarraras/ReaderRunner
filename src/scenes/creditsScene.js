@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import config from '../config/config';
 
@@ -63,3 +64,4 @@ export default class CreditsScene extends Phaser.Scene {
   }
 }
 /* eslint-enable no-unused-expressions */
+/* eslint-enable import/no-unresolved */
