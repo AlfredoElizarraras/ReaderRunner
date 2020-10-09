@@ -2,6 +2,8 @@
  :runner: Reader Runner :book:
 </h1>
 
+![Quick Demo](/assets/ReaderRunnerDemo.gif?raw=true "Quick Demo")
+
 
 ## Table of Contents
 

@@ -9,25 +9,32 @@ export async function saveScore(playerName, score) {
 
   const request = new Request(url, {
     method: 'POST',
-    mode: 'cors',
     body: JSON.stringify(newscore),
     headers: new Headers({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     }),
   });
 
-  return fetch(request)
-    .then(response => response.json())
-    .then(response => response)
-    .catch(err => err);
+  try {
+    const response = await fetch(request);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    localStorage.setItem('error', `${error}`);
+  }
 }
 
-export const getScores = async () => fetch(url, {
-  mode: 'cors',
-})
-  .then(response => response.json())
-  .then(response => response)
-  .catch(err => err);
+export const getScores = async () => {
+  try {
+    const response = await fetch(url, { mode: 'cors' });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    localStorage.setItem('error', `${error}`);
+  }
+} 
+
 
 export const setConfig = (configKey, value) => {
   if ((value !== null || value !== undefined)
