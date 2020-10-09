@@ -13,6 +13,7 @@
 * [Built With](#built-with)
 * [Prerequisites](#prerequisites)
 * [Getting started](#getting-started)
+* [How to play](#how-to-play)
 * [Authors](#authors)
 * [Contributing](#contributing)
 * [Acknowledgments](#acknowledgments)
@@ -59,6 +60,11 @@ To get a local copy up and running follow these simple example steps
   ```
 - Change directory to ReaderRunner folder.
 - npm install
+
+## How to play
+
+- Up arrow to jump.
+- Right arrow to run.
 
 ## Author
 
